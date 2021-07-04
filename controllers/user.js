@@ -42,7 +42,7 @@ module.exports.signIn=async(req,res)=>{
                 const token=jwt.sign({_id:user._id},process.env.JWT_SECRET)
                 return res.status(200).json({token})
             }
-            return res.status(401).json({msg:'Invalid email/password'})//is passowrd is inncorrect
+            return res.status(422).json({msg:'Invalid email/password'})//is passowrd is inncorrect
         })
     }
     catch(err){

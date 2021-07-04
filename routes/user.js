@@ -4,5 +4,8 @@ const user=require('../controllers/user')
 
 route.post('/sign-up',user.signUp)
 route.post('/sign-in',user.signIn)
+route.get('/pro',require('../middlewares/checkAuth').checkAuth,(req,res)=>{
+    res.send('hello world!')
+})
 
 module.exports=route
