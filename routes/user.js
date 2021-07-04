@@ -1,11 +1,8 @@
 const express=require('express')
 const route=express.Router()
-const user=require('../controllers/user')
+const userController=require('../controllers/user')
 
-route.post('/sign-up',user.signUp)
-route.post('/sign-in',user.signIn)
-route.get('/pro',require('../middlewares/checkAuth').checkAuth,(req,res)=>{
-    res.send('hello world!')
-})
+route.post('/sign-up',userController.signUp)
+route.post('/sign-in',userController.signIn)
 
 module.exports=route
