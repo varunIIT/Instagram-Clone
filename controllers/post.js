@@ -14,11 +14,20 @@ module.exports.create=async (req,res)=>{
         console.log(err)
     }
 }
-module.exports.display=async (req,res)=>{
+module.exports.allPost=async (req,res)=>{
     try{
-        const posts =await Post.find({}).populate('user')//get array of all posts with author(user) populated
-        res.status(200).send({posts})
+        const allPost =await Post.find({}).populate('user')//get array of all posts with author(user) populated
+        res.status(200).json({allPost})
 
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.myPost=async (req,res)=>{
+    try{
+        const myPost=await Post.find({user:req.user._id})
+        res.status(200).json({myPost})
     }
     catch(err){
         console.log(err)
