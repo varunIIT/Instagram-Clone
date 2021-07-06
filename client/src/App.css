@@ -50,3 +50,7 @@ h2{
     flex-wrap: wrap;
     justify-content: center;
   }
+  .home-card{
+      max-width: 500px;
+      margin: 30px auto;
+  }
