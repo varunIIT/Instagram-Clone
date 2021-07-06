@@ -25,3 +25,28 @@ h2{
   .input-field input:focus {
     color: #42a5f5 !important;
   }
+  #profile-box{
+      width: 55%;
+      display: flex;
+      justify-content: space-around;
+  }
+  #profile-info{
+      width:110%;
+      display: flex;
+      justify-content: space-between;
+  }
+  .profile-image{
+    min-width: 80px;
+    width: 65%;
+    border-radius: 50%;
+  }
+  .post-image{
+    min-width: 150px;
+    width: 32%;  
+    margin: 5px;
+  }
+  #post-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
