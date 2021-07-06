@@ -8,21 +8,24 @@ a{
 h2{
     margin:20px auto;
 }
-.btn{
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
 .auth-card{
     width: 400px;
     margin: 40px auto;
     padding: 20px;
     text-align: center;
 }
+.createPost-card{
+  min-width: 400px;
+  width: 45%;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
 .input-field input:focus {
     border-bottom: 1px solid #42a5f5 !important;
     box-shadow: 0 1px 0 0 #42a5f5 !important;
   }
-  .input-field input:focus {
+  .input-field input:focus+label {
     color: #42a5f5 !important;
   }
   #profile-box{
