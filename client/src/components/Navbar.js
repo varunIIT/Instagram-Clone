@@ -3,8 +3,8 @@ const Navbar = () => {
     return (
         <nav>
            <div className="nav-wrapper white">
-                <Link to="/" class="brand-logo left">Instagram</Link>
-                <ul id="nav-mobile" class="right">
+                <Link to="/" className="brand-logo left">Instagram</Link>
+                <ul id="nav-mobile" className="right">
                     <li><Link to="/sign-in">Sign In</Link></li>
                     <li><Link to="/sign-up">Sign Up</Link></li>
                     <li><Link to="/profile">Profile</Link></li>
