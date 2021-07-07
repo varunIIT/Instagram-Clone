@@ -2,13 +2,13 @@ const Post=require('../models/post')
 
 module.exports.create=async (req,res)=>{
     try{
-        const {title,body}=req.body
-        if(!title||!body){//cannot create a post with empty title/body
-            return res.status(422).json({msg:'title/body can not be empty'})
+        const {title,body,pic}=req.body
+        if(!title||!body||!pic){//cannot create a post with empty title/body
+            return res.status(422).json({error:'Title/Body/Pic can not be empty!'})
         }
         //creating a post
-        const post=await Post.create({title,body,user:req.user._id})//we  get req.user from checkAuth middleware
-        return res.status(201).json(post)
+        const post=await Post.create({title,body,photo:pic,user:req.user._id})//we  get req.user from checkAuth middleware
+        return res.status(201).json({success:'Post created successfully!'})
     }
     catch(err){
         console.log(err)
