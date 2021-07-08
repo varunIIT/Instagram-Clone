@@ -1,4 +1,21 @@
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../../App"
+
 const Profile = () => {
+    const {state,dispatch}=useContext(UserContext)
+    const [myPosts,setMyPosts]=useState([])
+    useEffect(()=>{
+        fetch('/post/my-post',{
+            method:'get',
+            headers:{
+                authorization:'Bearer '+localStorage.getItem('token')
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            setMyPosts(data.myPost)
+        })
+    },[])
     return (
         <div className="profile-container" style={{ margin: "30px auto",width:'60%'}}>
             <div id="profile-box">
@@ -6,9 +23,9 @@ const Profile = () => {
                     <img className="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU" alt="" />
                 </div>
                 <div>
-                    <h4>Varun Kumar</h4>
+                    <h4>{state}</h4>
                     <div id="profile-info">
-                        <div>40 posts</div>
+                        <div>{myPosts.length} posts</div>
                         <div>40 followers</div>
                         <div>40 followings</div>
                     </div>
@@ -17,10 +34,11 @@ const Profile = () => {
             </div>
             <hr />
                 <div id="post-container">
-                    <img className="post-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrpYFFuYscpPd13yOv-elTXnb0HUZ_RfwjXQ&usqp=CAU" alt="" />
-                    <img className="post-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrpYFFuYscpPd13yOv-elTXnb0HUZ_RfwjXQ&usqp=CAU" alt="" />
-                    <img className="post-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrpYFFuYscpPd13yOv-elTXnb0HUZ_RfwjXQ&usqp=CAU" alt="" />
-                    <img className="post-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrpYFFuYscpPd13yOv-elTXnb0HUZ_RfwjXQ&usqp=CAU" alt="" />  
+                    {
+                        myPosts.map(item=>{
+                            return <img className="post-image" src={item.photo} alt={item.title} />
+                        })
+                    }
                 </div>
             </div>
     )
