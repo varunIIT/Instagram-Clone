@@ -7,7 +7,7 @@ const Home = () => {
                     <img src="https://www.marshallsindia.com/images/younique/nature/nature-cover-slider-8.jpg" alt="" />
                 </div>
                 <div className="card-content">
-                    <i class="material-icons red-text">favorite</i>
+                    <i className="material-icons red-text">favorite</i>
                     <h6>first post</h6>
                     <p>this is my first post</p>
                     <input placeholder="comment here..." type="text" ></input>
@@ -19,7 +19,7 @@ const Home = () => {
                     <img src="https://www.marshallsindia.com/images/younique/nature/nature-cover-slider-8.jpg" alt="" />
                 </div>
                 <div className="card-content">
-                    <i class="material-icons red-text">favorite</i>
+                    <i className="material-icons red-text">favorite</i>
                     <h6>first post</h6>
                     <p>this is my first post</p>
                     <input placeholder="comment here..." type="text" ></input>
@@ -31,7 +31,7 @@ const Home = () => {
                     <img src="https://www.marshallsindia.com/images/younique/nature/nature-cover-slider-8.jpg" alt="" />
                 </div>
                 <div className="card-content">
-                    <i class="material-icons red-text">favorite</i>
+                    <i className="material-icons red-text">favorite</i>
                     <h6>first post</h6>
                     <p>this is my first post</p>
                     <input placeholder="comment here..." type="text" ></input>
@@ -43,7 +43,7 @@ const Home = () => {
                     <img src="https://www.marshallsindia.com/images/younique/nature/nature-cover-slider-8.jpg" alt="" />
                 </div>
                 <div className="card-content">
-                    <i class="material-icons red-text">favorite</i>
+                    <i className="material-icons red-text">favorite</i>
                     <h6>first post</h6>
                     <p>this is my first post</p>
                     <input placeholder="comment here..." type="text" ></input>
