@@ -33,3 +33,21 @@ module.exports.myPost=async (req,res)=>{
         console.log(err)
     }
 }
+module.exports.likeUnlike=async (req,res)=>{
+    try{
+        const post=await Post.findById(req.params.id)//finding post on which like/unlike to be performed
+        const {likedBy}=post//extracting likedBy array from post object 
+
+        if(likedBy.includes(req.user._id)){//true if already liked i.e time to unlike it back
+            likedBy.pull(req.user._id)
+        }
+        else{//time to like it
+            likedBy.push(req.user._id)
+        }
+        await post.save()
+        res.status(200).json(post)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
