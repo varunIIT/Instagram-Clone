@@ -16,7 +16,7 @@ module.exports.create=async (req,res)=>{
 }
 module.exports.allPost=async (req,res)=>{
     try{
-        const allPost =await Post.find({}).populate('user')//get array of all posts with author(user) populated
+        const allPost =await Post.find({}).populate('user').populate('comments')//get array of all posts with author(user) populated
         res.status(200).json({allPost})
 
     }
