@@ -35,7 +35,7 @@ module.exports.myPost=async (req,res)=>{
 }
 module.exports.likeUnlike=async (req,res)=>{
     try{
-        const post=await Post.findById(req.params.id).populate('user')//finding post on which like/unlike to be performed
+        const post=await Post.findById(req.params.id).populate('user').populate('comments')//finding post on which like/unlike to be performed
         const {likedBy}=post//extracting likedBy array from post object 
 
         if(likedBy.includes(req.user._id)){//true if already liked i.e time to unlike it back

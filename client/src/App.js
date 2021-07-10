@@ -35,6 +35,7 @@ const Routing = () => {
   )
 }
 function App() {
+  console.log('app')
   const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <UserContext.Provider value={{ state, dispatch }}>

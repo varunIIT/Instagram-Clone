@@ -6,7 +6,7 @@ module.exports.create=async (req,res)=>{
         if(!req.body.text){
             return res.status(422).json({error:'Comment can not be empty!'})
         }
-        const post=await Post.findById(req.params.postId)
+        const post=await Post.findById(req.params.postId).populate('user').populate('comments')
         if(!post){
             return res.status(422).json({error:'No such post exists!'})
         }
@@ -17,7 +17,7 @@ module.exports.create=async (req,res)=>{
         })
         post.comments.push(comment._id)
         await post.save()
-        return res.status(201).json({success:'Commented Successfully!'})
+        return res.status(201).json({post})
 
     }
     catch(err){

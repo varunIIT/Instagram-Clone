@@ -1,10 +1,15 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { UserContext } from "../App"
+import M from 'materialize-css'
 
 const Navbar = () => {
     const history = useHistory()
     const { state, dispatch } = useContext(UserContext)
+    useEffect(() => {
+
+        M.AutoInit();
+    }, [])
     const renderLinks = () => {
         const signOut = () => {
             localStorage.clear()
@@ -16,6 +21,7 @@ const Navbar = () => {
                 window.history.pushState(null, "", window.location.href);
             };
         }
+        
         if (state) {
             return (
                 [
@@ -36,14 +42,20 @@ const Navbar = () => {
         }
     }
     return (
-        <nav>
+        <>
+            <nav>
             <div className="nav-wrapper white">
                 <Link to={state ? '/' : 'sign-in'} className="brand-logo left">Instagram</Link>
-                <ul id="nav-mobile" className="right">
+                <Link href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></Link>
+                <ul id="nav-mobile" className="right hide-on-med-and-down">
                     {renderLinks()}
                 </ul>
             </div>
         </nav>
+         <ul class="sidenav" id="mobile-demo">
+         {renderLinks()}
+       </ul>
+        </>
     )
 }
 export default Navbar

@@ -23,7 +23,7 @@ const Profile = () => {
                     <img className="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU" alt="" />
                 </div>
                 <div>
-                    <h4>{state}</h4>
+                    <h4>Varun</h4>
                     <div id="profile-info">
                         <div>{myPosts.length} posts</div>
                         <div>40 followers</div>
