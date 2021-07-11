@@ -1,5 +1,5 @@
 const Post=require('../models/post')
-
+const Comment=require('../models/comment')
 module.exports.create=async (req,res)=>{
     try{
         const {title,body,pic}=req.body
@@ -16,7 +16,9 @@ module.exports.create=async (req,res)=>{
 }
 module.exports.allPost=async (req,res)=>{
     try{
-        const allPost =await Post.find({}).populate('user').populate('comments')//get array of all posts with author(user) populated
+        const allPost =await Post.find({})
+        .populate('user')
+        .populate({path:'comments',populate:'user'})//get array of all posts with author(user) populated and comments populated
         res.status(200).json({allPost})
 
     }
@@ -26,7 +28,7 @@ module.exports.allPost=async (req,res)=>{
 }
 module.exports.myPost=async (req,res)=>{
     try{
-        const myPost=await Post.find({user:req.user._id})
+        const myPost=await Post.find({user:req.user._id})//geting all post with created by this user
         res.status(200).json({myPost})
     }
     catch(err){
@@ -35,7 +37,12 @@ module.exports.myPost=async (req,res)=>{
 }
 module.exports.likeUnlike=async (req,res)=>{
     try{
-        const post=await Post.findById(req.params.id).populate('user').populate('comments')//finding post on which like/unlike to be performed
+        const post=await Post.findById(req.params.id)
+        .populate('user')
+        .populate({path:'comments',populate:'user'})//finding post on which like/unlike to be performed
+        if(!post){
+            return res.status(422).json({error:'No such post exists!'})
+        }
         const {likedBy}=post//extracting likedBy array from post object 
 
         if(likedBy.includes(req.user._id)){//true if already liked i.e time to unlike it back
@@ -46,6 +53,23 @@ module.exports.likeUnlike=async (req,res)=>{
         }
         await post.save()
         res.status(200).json(post)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.delete=async(req,res)=>{
+    try{
+        const post=await Post.findById(req.params.postId)
+        //comparing both with type objectId will always return false,make atleast one with type String
+        if(!post || post.user!=req.user.id){//authenticating user wheather user can delete post or not 
+            return res.status(422).json({error:'cannot perform delete action!'})
+        }
+        
+        await Comment.deleteMany({_id:{$in:post.comments}})//deleting comments associated to thid post
+        await post.remove()//deleting this post
+        res.status(200).json({success:'Post/associated comments deleted successfully!'})
+
     }
     catch(err){
         console.log(err)

@@ -35,6 +35,7 @@ const SignIn = () => {
                 localStorage.setItem('token',data.token)
                 localStorage.setItem('user',JSON.stringify({_id:data._id,name:data.name,email:data.email}))
                 dispatch({type:'USER',payload:{_id:data._id,name:data.name,email:data.email}})
+                //toast message display
                 M.toast({html:'Signed In successfully!',classes:'green lighten-1 rounded',displayLength:3000})
                 history.push('/')
             }

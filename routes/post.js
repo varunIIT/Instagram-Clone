@@ -7,4 +7,5 @@ route.post('/create',checkAuth,postController.create)
 route.get('/all-post',checkAuth,postController.allPost)
 route.get('/my-post',checkAuth,postController.myPost)
 route.patch('/like-unlike/:id',checkAuth,postController.likeUnlike)
+route.delete('/delete/:postId',checkAuth,postController.delete)
 module.exports=route

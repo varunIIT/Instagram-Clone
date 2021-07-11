@@ -46,13 +46,13 @@ const Navbar = () => {
             <nav>
             <div className="nav-wrapper white">
                 <Link to={state ? '/' : 'sign-in'} className="brand-logo left">Instagram</Link>
-                <Link href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></Link>
+                <Link to="#" data-target="mobile-demo" className="sidenav-trigger right"><i className="material-icons">menu</i></Link>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     {renderLinks()}
                 </ul>
             </div>
         </nav>
-         <ul class="sidenav" id="mobile-demo">
+         <ul className="sidenav" id="mobile-demo">
          {renderLinks()}
        </ul>
         </>

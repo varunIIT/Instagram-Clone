@@ -35,8 +35,8 @@ const Profile = () => {
             <hr />
                 <div id="post-container">
                     {
-                        myPosts.map(item=>{
-                            return <img className="post-image" src={item.photo} alt={item.title} />
+                        myPosts.map((item,index)=>{
+                            return <img key={index}className="post-image" src={item.photo} alt={item.title} />
                         })
                     }
                 </div>
