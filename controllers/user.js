@@ -1,4 +1,5 @@
 const User=require('../models/user')
+const Post=require('../models/post')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
 module.exports.signUp=async (req,res)=>{
@@ -45,6 +46,20 @@ module.exports.signIn=async(req,res)=>{
             }
             return res.status(422).json({error:'Invalid Email/Password!'})//is passowrd is inncorrect
         })
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.profile=async (req,res)=>{
+    try{
+        const user=await User.findById(req.params.userId)
+        if(!user){
+            return res.status(422).json({error:'No such user exists!'})
+        }
+        const post=await Post.find({user:user._id})
+        
+        return res.status(200).json({user,post})
     }
     catch(err){
         console.log(err)

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../App"
 import M from 'materialize-css'
+import { Link } from "react-router-dom"
 
 const Home = () => {
     const { state, dispatch } = useContext(UserContext)
@@ -155,7 +156,7 @@ const Home = () => {
             {posts.map((item, index) => {
                 return (
                     <div className="card home-card" key={index}>
-                        <h5 style={{ margin: '4px 4px', fontWeight: '500' }}>{item.user.name}
+                        <h5 style={{ margin: '4px 4px', fontWeight: '500' }}><Link to={state._id==item.user._id?'/profile':`/profile/${item.user._id}`}>{item.user.name}</Link>
                             {item.user._id == state._id && <i className="material-icons" style={{ float: 'right', cursor: 'pointer' }} onClick={() => { deletePost(item._id) }}>delete</i>}
                         </h5>
 
@@ -183,14 +184,14 @@ const Home = () => {
                             <div data-target={`model-${index}`} className="modal-trigger" style={{ fontWeight: 500, cursor: 'pointer' }} >View all {item.comments.length} comments!</div>
 
                             <div id={`model-${index}`} className="modal">
-                                <h5 style={{ fontFamily: 'Grand Hotel, cursive', marginLeft: '5px' }}>Recent Comments</h5>
+                                <h4 style={{ fontFamily: 'Grand Hotel, cursive', margin: '5px 5px' }}>Recent Comments</h4>
                                 <hr style={{ margin: 0 }} />
                                 <div className="modal-content" style={{ padding: '10px' }}>
                                     <ul className="collection" style={{ margin: 0 }}>
                                         {item.comments.map((comment, index) => {
                                             return <li key={index} className="collection-item">
                                                 <div>
-                                                    <b>{comment.user.name}</b>
+                                                    <b><Link to={state._id==comment.user._id?'/profile':`/profile/${comment.user._id}`}>{comment.user.name}</Link></b>
                                                     {
                                                         comment.likedBy.includes(state._id)
                                                             ? <i className="material-icons red-text" onClick={() => { likeUnlikeComment(comment._id) }} style={{ cursor: 'pointer', float: 'right' }}>favorite</i>
