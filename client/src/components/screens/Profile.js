@@ -4,9 +4,10 @@ import { UserContext } from "../../App"
 const Profile = () => {
     const {state,dispatch}=useContext(UserContext)
     const [myPosts,setMyPosts]=useState([])
+    const [user,setUser]=useState(null)
     const [loading,setLoading]=useState(0)
     useEffect(()=>{
-        fetch('/post/my-post',{
+        fetch('/user/profile-info',{
             method:'get',
             headers:{
                 authorization:'Bearer '+localStorage.getItem('token')
@@ -15,6 +16,7 @@ const Profile = () => {
         .then(res=>res.json())
         .then(data=>{
             setMyPosts(data.myPost)
+            setUser(data.user)
             setLoading(1)
         })
     },[])
@@ -27,11 +29,12 @@ const Profile = () => {
                      <img className="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU" alt="" />
                  </div>
                  <div>
-                     <h4>{state.name}</h4>
+                     <h4 style={{margin:0}}>{state.name}</h4>
+                     <h5>{state.email}</h5>
                      <div id="profile-info">
-                         <div>{myPosts.length} posts</div>
-                         <div>40 followers</div>
-                         <div>40 followings</div>
+                         <div style={{marginRight:'10px'}}>{myPosts.length} posts</div>
+                         <div style={{marginRight:'10px'}}>{user.followers.length} followers</div>
+                         <div>{user.followings.length} followings</div>
                      </div>
  
                  </div>

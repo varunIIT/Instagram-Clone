@@ -26,15 +26,7 @@ module.exports.allPost=async (req,res)=>{
         console.log(err)
     }
 }
-module.exports.myPost=async (req,res)=>{
-    try{
-        const myPost=await Post.find({user:req.user._id})//geting all post with created by this user
-        res.status(200).json({myPost})
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+
 module.exports.likeUnlike=async (req,res)=>{
     try{
         const post=await Post.findById(req.params.id)

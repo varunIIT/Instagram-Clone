@@ -34,9 +34,7 @@ h2{
       justify-content: space-around;
   }
   #profile-info{
-      width:110%;
       display: flex;
-      justify-content: space-between;
   }
   .profile-image{
     min-width: 80px;

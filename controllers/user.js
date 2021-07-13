@@ -51,7 +51,18 @@ module.exports.signIn=async(req,res)=>{
         console.log(err)
     }
 }
-module.exports.profile=async (req,res)=>{
+//geting user's profile information
+module.exports.profileInfo=async (req,res)=>{
+    try{
+        const myPost=await Post.find({user:req.user._id})//geting all post with created by this user
+        const user=await User.findById(req.user._id)
+        res.status(200).json({myPost,user})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+module.exports.othersProfile=async (req,res)=>{
     try{
         const user=await User.findById(req.params.userId)
         if(!user){
@@ -60,6 +71,34 @@ module.exports.profile=async (req,res)=>{
         const post=await Post.find({user:user._id})
         
         return res.status(200).json({user,post})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+//follow/unfollow a user
+module.exports.followUnfollow=async (req,res)=>{
+    try{
+        const loggedInUser=await User.findById(req.user._id)
+        const otherUser=await User.findById(req.params.followId)
+        if(!otherUser){
+            return res.status(422).json({error:'No such user exists!'})
+        }
+        let isFollowing=loggedInUser.followings.includes(req.params.followId)
+        //if loggedInUser is already following otherUser ,then make in unfollow
+        if(isFollowing){
+            loggedInUser.followings.pull(req.params.followId)//removing otherUser form following list of loggedInUser
+            otherUser.followers.pull(req.user._id)//removing LoggedInUser form followers list of otherUser
+            
+        }
+        else{
+            loggedInUser.followings.push(req.params.followId)//adding otherUser form following list of loggedInUser
+            otherUser.followers.push(req.user._id)//adding LoggedInUser form followers list of otherUser
+        }
+        await loggedInUser.save()
+        await otherUser.save()
+        res.status(200).json({otherUser})
+
     }
     catch(err){
         console.log(err)

@@ -156,7 +156,7 @@ const Home = () => {
             {posts.map((item, index) => {
                 return (
                     <div className="card home-card" key={index}>
-                        <h5 style={{ margin: '4px 4px', fontWeight: '500' }}><Link to={state._id==item.user._id?'/profile':`/profile/${item.user._id}`}>{item.user.name}</Link>
+                        <h5 style={{ margin: '5px 5px', fontWeight: '500' }}><Link to={state._id==item.user._id?'/profile':`/others-profile/${item.user._id}`}>{item.user.name}</Link>
                             {item.user._id == state._id && <i className="material-icons" style={{ float: 'right', cursor: 'pointer' }} onClick={() => { deletePost(item._id) }}>delete</i>}
                         </h5>
 
@@ -191,7 +191,7 @@ const Home = () => {
                                         {item.comments.map((comment, index) => {
                                             return <li key={index} className="collection-item">
                                                 <div>
-                                                    <b><Link to={state._id==comment.user._id?'/profile':`/profile/${comment.user._id}`}>{comment.user.name}</Link></b>
+                                                    <b><Link to={state._id==comment.user._id?'/profile':`/others-profile/${comment.user._id}`}>{comment.user.name}</Link></b>
                                                     {
                                                         comment.likedBy.includes(state._id)
                                                             ? <i className="material-icons red-text" onClick={() => { likeUnlikeComment(comment._id) }} style={{ cursor: 'pointer', float: 'right' }}>favorite</i>

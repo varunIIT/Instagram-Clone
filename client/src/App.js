@@ -33,7 +33,7 @@ const Routing = () => {
       <Route exact path="/sign-in"><SignIn /></Route>
       <Route exact path="/sign-up"><SignUp /></Route>
       <Route exact path="/create-post"><CreatePost /></Route>
-      <Route exact path="/profile/:userId"><UserProfile/></Route>
+      <Route exact path="/others-profile/:userId"><UserProfile/></Route>
     </Switch>
   )
 }

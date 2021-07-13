@@ -16,7 +16,15 @@ const userSchema=new Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    followings:[{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    }],
+    followers:[{
+        type:Schema.Types.ObjectId,
+        ref:'User'
+    }]
 })
 //storing the hashed password in db 
 userSchema.pre('save', function(next) {
