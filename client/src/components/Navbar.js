@@ -25,6 +25,7 @@ const Navbar = () => {
         if (state) {
             return (
                 [
+                    <li key={0}><Link to="/my-followings-posts">My Followings Posts</Link></li>,
                     <li key={1}><Link to="/profile">Profile</Link></li>,
                     <li key={2}><Link to="/create-post">Create Post</Link></li>,
                     <li key={3}><button onClick={signOut} className="btn waves-effect waves-light  red lighten-1">Sign Out</button></li>,

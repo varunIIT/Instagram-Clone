@@ -9,6 +9,7 @@ import SignIn from './components/screens/SignIn'
 import Home from './components/screens/Home'
 import CreatePost from './components/screens/CreatePost'
 import UserProfile from'./components/screens/UserProfile'
+import MyFollowingsPosts from'./components/screens/MyFollowingsPosts'
 
 import { initialState, reducer } from './reducers/userReducer'
 
@@ -34,6 +35,7 @@ const Routing = () => {
       <Route exact path="/sign-up"><SignUp /></Route>
       <Route exact path="/create-post"><CreatePost /></Route>
       <Route exact path="/others-profile/:userId"><UserProfile/></Route>
+      <Route exact path="/my-followings-posts"><MyFollowingsPosts/></Route>
     </Switch>
   )
 }
