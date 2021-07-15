@@ -104,3 +104,19 @@ module.exports.followUnfollow=async (req,res)=>{
         console.log(err)
     }
 }
+//updating user profileImage
+module.exports.updateProfilePic=async(req,res)=>{
+    try{
+        let user
+        if(req.body.url){
+             user=await User.findByIdAndUpdate(req.user.id,{profilePic:req.body.url},{new:true})//updating profile pic url of this user in db
+        }
+        else{
+             user=await User.findByIdAndUpdate(req.user.id,{profilePic:'http://localhost:5000/default-profile-pic.png'},{new:true})
+        }
+        res.status(200).json({user})
+    }
+    catch(err){
+        console.log(err)
+    }
+}

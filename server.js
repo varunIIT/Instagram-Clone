@@ -9,7 +9,9 @@ require('./config/db')//MongoDB connection
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+app.use('/',express.static(__dirname+'./utils'))//make path for default profile pic
 app.use('/',require('./routes/index'))//starting of all the routes 
+
 
 app.listen(port,()=>{
     console.log(`listening at http://localhost:${port}`)

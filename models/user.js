@@ -24,7 +24,11 @@ const userSchema=new Schema({
     followers:[{
         type:Schema.Types.ObjectId,
         ref:'User'
-    }]
+    }],
+    profilePic:{
+        type:String,
+        default:'http://localhost:5000/default-profile-pic.png'
+    }
 })
 //storing the hashed password in db 
 userSchema.pre('save', function(next) {
