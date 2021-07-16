@@ -20,7 +20,7 @@ const Routing = () => {
   useEffect(()=>{
     const user=JSON.parse(localStorage.getItem('user'))
     if(user){
-      dispatch({type:'USER',payload:{_id:user._id,name:user.name,email:user.email}})
+      dispatch({type:'USER',payload:{_id:user._id,name:user.name,email:user.email,profilePic:user.profilePic}})
       // history.push('/')
     }
     else{

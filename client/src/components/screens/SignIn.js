@@ -33,8 +33,9 @@ const SignIn = () => {
             else{
                 //storing jwt token and user's credentials to localstorage
                 localStorage.setItem('token',data.token)
-                localStorage.setItem('user',JSON.stringify({_id:data._id,name:data.name,email:data.email}))
-                dispatch({type:'USER',payload:{_id:data._id,name:data.name,email:data.email}})
+                localStorage.setItem('user',JSON.stringify({_id:data._id,name:data.name,email:data.email,profilePic:data.profilePic}))
+                //making a state of this user
+                dispatch({type:'USER',payload:{_id:data._id,name:data.name,email:data.email,profilePic:data.profilePic}})
                 //toast message display
                 M.toast({html:'Signed In successfully!',classes:'green lighten-1 rounded',displayLength:3000})
                 history.push('/')

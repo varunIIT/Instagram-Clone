@@ -41,8 +41,8 @@ module.exports.signIn=async(req,res)=>{
             }
             if(isMatch){//if passowrd is matched i.e successfull login
                 const token=jwt.sign({_id:user._id},process.env.JWT_SECRET)
-                const {_id,name,email}=user
-                return res.status(200).json({token,_id,name,email})
+                const {_id,name,email,profilePic}=user
+                return res.status(200).json({token,_id,name,email,profilePic})
             }
             return res.status(422).json({error:'Invalid Email/Password!'})//is passowrd is inncorrect
         })
@@ -112,7 +112,7 @@ module.exports.updateProfilePic=async(req,res)=>{
              user=await User.findByIdAndUpdate(req.user.id,{profilePic:req.body.url},{new:true})//updating profile pic url of this user in db
         }
         else{
-             user=await User.findByIdAndUpdate(req.user.id,{profilePic:'http://localhost:5000/default-profile-pic.png'},{new:true})
+             user=await User.findByIdAndUpdate(req.user.id,{profilePic:'https://res.cloudinary.com/imageuploadtocloud/image/upload/v1626359776/images_tyiggw.jpg'},{new:true})
         }
         res.status(200).json({user})
     }

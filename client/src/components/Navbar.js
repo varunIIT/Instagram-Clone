@@ -26,7 +26,12 @@ const Navbar = () => {
             return (
                 [
                     
-                    <li key={1}><Link to="/profile">Profile</Link></li>,
+                    <li key={1}><Link to="/profile">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <img src={state.profilePic} alt="" style={{ height: '35px', borderRadius: '50%', marginRight: '1px' }} />
+                                    {state.name}
+                                </div>
+                        </Link></li>,
                     <li key={2}><Link to="/create-post">Create Post</Link></li>,
                     <li key={3}><Link to="/my-followings-posts">My Followings Posts</Link></li>,
                     <li key={4}><button onClick={signOut} className="btn waves-effect waves-light  red lighten-1">Sign Out</button></li>

@@ -27,7 +27,7 @@ const userSchema=new Schema({
     }],
     profilePic:{
         type:String,
-        default:'http://localhost:5000/default-profile-pic.png'
+        default:'https://res.cloudinary.com/imageuploadtocloud/image/upload/v1626359776/images_tyiggw.jpg'
     }
 })
 //storing the hashed password in db 
