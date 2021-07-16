@@ -11,6 +11,14 @@ app.use(express.urlencoded({extended:true}))
 
 app.use('/',require('./routes/index'))//starting of all the routes 
 
+//serving static frontend files from reactJs
+if(process.env.NODE_ENV=='production'){
+    app.use(express.static('client/build'))
+    const path=require('path')
+    app.get('*',(req,res)=>{
+        res.sendFile(path.join(__dirname,'client','build','index.html'))
+    })
+}
 
 app.listen(port,()=>{
     console.log(`listening at http://localhost:${port}`)
