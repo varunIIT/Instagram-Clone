@@ -28,6 +28,12 @@ const userSchema=new Schema({
     profilePic:{
         type:String,
         default:'https://res.cloudinary.com/imageuploadtocloud/image/upload/v1626359776/images_tyiggw.jpg'
+    },
+    resetPasswordToken:{
+        type:String
+    },
+    resetPasswordExpiry:{
+        type:Number
     }
 })
 //storing the hashed password in db 

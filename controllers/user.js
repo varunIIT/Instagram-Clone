@@ -2,6 +2,7 @@ const User=require('../models/user')
 const Post=require('../models/post')
 const bcrypt=require('bcrypt')
 const jwt=require('jsonwebtoken')
+const sendEmail=require('../utils/mailer')
 module.exports.signUp=async (req,res)=>{
     try{
         const {name,email,password}=req.body
@@ -118,5 +119,23 @@ module.exports.updateProfilePic=async(req,res)=>{
     }
     catch(err){
         console.log(err)
+    }
+}
+module.exports.resetPassword=async(req,res)=>{
+    try{
+        const user=await User.findOne({email:req.body.email})
+        if(!user){//checking if user's email is signed up or not
+            return res.status(422).json({error:'No such email exists!'})
+        }
+        const resetToken=jwt.sign({email:req.body.email},process.env.JWT_SECRET)//unique jwt token for this user
+        user.resetPasswordToken=resetToken
+        user.resetPasswordExpiry=Date.now()+300000//setting expiry date for current reset password session which is of 5 minutes form now
+        await user.save()
+        //Now send mail to this user
+        sendEmail(req.body.email)
+        res.status(200).json({success:'Please check your mail!'})
+    }
+    catch(err){
+        console.log(errr)
     }
 }
