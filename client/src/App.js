@@ -28,7 +28,7 @@ const Routing = () => {
       }
     }
     else{
-      if(!history.location.pathname.startsWith('/reset-password')&&!history.location.pathname.startsWith('/new-password')&&!history.location.pathname.startsWith('/sign-up'))
+      if(!history.location.pathname.startsWith('/reset-password')&&!history.location.pathname.startsWith('/sign-up'))
       history.push('/sign-in')
     }
   },[])
