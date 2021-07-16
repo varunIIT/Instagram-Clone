@@ -10,6 +10,8 @@ import Home from './components/screens/Home'
 import CreatePost from './components/screens/CreatePost'
 import UserProfile from'./components/screens/UserProfile'
 import MyFollowingsPosts from'./components/screens/MyFollowingsPosts'
+import ResetPassword from './components/screens/ResetPassword'
+import NewPassword from './components/screens/NewPassword'
 
 import { initialState, reducer } from './reducers/userReducer'
 
@@ -21,9 +23,12 @@ const Routing = () => {
     const user=JSON.parse(localStorage.getItem('user'))
     if(user){
       dispatch({type:'USER',payload:{_id:user._id,name:user.name,email:user.email,profilePic:user.profilePic}})
-      // history.push('/')
+      if(history.location.pathname.startsWith('/sign-in')||history.location.pathname.startsWith('/sign-up')){
+        history.push('/')
+      }
     }
     else{
+      if(!history.location.pathname.startsWith('/reset-password')&&!history.location.pathname.startsWith('/new-password')&&!history.location.pathname.startsWith('/sign-up'))
       history.push('/sign-in')
     }
   },[])
@@ -36,6 +41,8 @@ const Routing = () => {
       <Route exact path="/create-post"><CreatePost /></Route>
       <Route exact path="/others-profile/:userId"><UserProfile/></Route>
       <Route exact path="/my-followings-posts"><MyFollowingsPosts/></Route>
+      <Route exact path="/reset-password"><ResetPassword/></Route>
+      <Route exact path="/new-password/:token"><NewPassword/></Route>
     </Switch>
   )
 }

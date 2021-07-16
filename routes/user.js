@@ -10,4 +10,5 @@ route.get('/others-profile/:userId',checkAuth,userController.othersProfile)
 route.patch('/follow-unfollow/:followId',checkAuth,userController.followUnfollow)
 route.patch('/update-profile-pic',checkAuth,userController.updateProfilePic)
 route.post('/reset-password',userController.resetPassword)
+route.post('/new-password',userController.newPassword)
 module.exports=route

@@ -58,3 +58,10 @@ h2{
 .comments-container{
   margin-top: 20px;
 }
+.reset-pass-link{
+  color:blue !important;
+  text-decoration:underline;
+}
+.reset-pass-link:hover{
+color: hotpink !important;
+}

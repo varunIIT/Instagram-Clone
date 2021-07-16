@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import M from 'materialize-css'
 import { useHistory } from "react-router"
 import{UserContext} from '../../App'
-
+import {Link} from 'react-router-dom'
 const SignIn = () => {
     const {state,dispatch}=useContext(UserContext)
     const history=useHistory()
@@ -59,6 +59,9 @@ const SignIn = () => {
                     <label htmlFor="password">Password</label>
                 </div>
                 <button className="btn waves-effect waves-light  blue lighten-1" onClick={postData}>Sign In</button>
+                <h6 style={{marginTop:'20px'}}>
+                    Forgot Password? Click <Link className="reset-pass-link" to="/reset-password">here</Link>
+                </h6>
 
             </div>
         </div>

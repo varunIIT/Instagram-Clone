@@ -127,15 +127,39 @@ module.exports.resetPassword=async(req,res)=>{
         if(!user){//checking if user's email is signed up or not
             return res.status(422).json({error:'No such email exists!'})
         }
-        const resetToken=jwt.sign({email:req.body.email},process.env.JWT_SECRET)//unique jwt token for this user
-        user.resetPasswordToken=resetToken
-        user.resetPasswordExpiry=Date.now()+300000//setting expiry date for current reset password session which is of 5 minutes form now
+        //generate random token for this user
+        const crypto = require("crypto");
+        const token = crypto.randomBytes(20).toString('hex');
+        user.resetPasswordToken=token
+        //setting expiry date for current reset password session which is of 5 minutes form now
+        user.resetPasswordExpiry=Date.now()+300000
         await user.save()
         //Now send mail to this user
-        sendEmail(req.body.email)
+        sendEmail(req.body.email,token)
         res.status(200).json({success:'Please check your mail!'})
     }
     catch(err){
         console.log(errr)
+    }
+}
+//changing user's password
+module.exports.newPassword=async (req,res)=>{
+    try{
+        const user=await User.findOne({resetPasswordToken:req.body.token})
+        if(!user){
+            return res.status(422).json({error:'Invalid Request!'})
+        }
+        if(user.resetPasswordExpiry-Date.now()<0){
+            return res.status(422).json({error:'Session expired, Please try again!'})
+        }
+        user.password=req.body.password//changing password
+        //making reset password token and expiry null
+        user.resetPasswordToken=null
+        user.resetPasswordExpiry=null
+        await user.save()
+        return res.status(200).json({success:'Your password has been changed!'})
+    }
+    catch(err){
+        console.log(err)
     }
 }
