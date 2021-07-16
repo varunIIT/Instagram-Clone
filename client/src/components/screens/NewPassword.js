@@ -1,8 +1,10 @@
 import { useState } from "react"
 import M from 'materialize-css'
 import { useParams } from "react-router"
+import { useHistory } from "react-router"
 
 const NewPassword = () => {
+    const history=useHistory()
     const {token}=useParams()
     const [password,setPassword]=useState('')
     const postData=()=>{
@@ -25,6 +27,7 @@ const NewPassword = () => {
             //successful password change
             else{
                 M.toast({html:data.success,classes:'green lighten-1 rounded',displayLength:3000})
+                history.push('/sign-in')
             }
            
         })

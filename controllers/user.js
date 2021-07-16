@@ -55,7 +55,7 @@ module.exports.signIn=async(req,res)=>{
 //geting user's profile information
 module.exports.profileInfo=async (req,res)=>{
     try{
-        const myPost=await Post.find({user:req.user._id})//geting all post with created by this user
+        const myPost=await Post.find({user:req.user._id}).sort('-createdAt')//geting all post with created by this user
         const user=await User.findById(req.user._id)
         res.status(200).json({myPost,user})
     }
@@ -69,7 +69,7 @@ module.exports.othersProfile=async (req,res)=>{
         if(!user){
             return res.status(422).json({error:'No such user exists!'})
         }
-        const post=await Post.find({user:user._id})
+        const post=await Post.find({user:user._id}).sort('-createdAt')
         
         return res.status(200).json({user,post})
     }

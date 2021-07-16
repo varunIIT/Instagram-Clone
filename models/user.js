@@ -35,7 +35,7 @@ const userSchema=new Schema({
     resetPasswordExpiry:{
         type:Number
     }
-})
+},{timestamps:true})
 //storing the hashed password in db 
 userSchema.pre('save', function(next) {
     var user = this;

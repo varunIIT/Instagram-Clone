@@ -19,6 +19,7 @@ module.exports.allPost=async (req,res)=>{
         const allPost =await Post.find({})
         .populate('user')
         .populate({path:'comments',populate:'user'})//get array of all posts with author(user) populated and comments populated
+        .sort('-createdAt')//sorted in descending order by the create time
         res.status(200).json({allPost})
 
     }
@@ -73,6 +74,7 @@ module.exports.myFollowings=async (req,res)=>{
         const post=await Post.find({user:{$in:followings}})
         .populate('user')
         .populate({path:'comments',populate:'user'})//get array of all posts with author(user) populated and comments populated
+        .sort('-createdAt')//sorted in descending order by the create time
         res.status(200).json({post})
     }
     catch(err){
