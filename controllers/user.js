@@ -163,3 +163,15 @@ module.exports.newPassword=async (req,res)=>{
         console.log(err)
     }
 }
+//search user 
+module.exports.search=async(req,res)=>{
+    try{
+        let pattern=new RegExp('^'+req.body.query)
+        console.log(pattern)
+        const user=await User.find({email:{$regex:pattern}})
+        res.status(200).json({user})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
