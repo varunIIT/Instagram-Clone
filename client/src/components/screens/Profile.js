@@ -70,9 +70,9 @@ const Profile = () => {
             {state && loading ?
                 <div className="profile-container" style={{ margin: "30px auto", width: '60%' }}>
                     <div id="profile-box">
-                        <div>
+                        <div style={{width:'200px'}}>
                             <img className="profile-image" src={user.profilePic} alt="" />
-                            <div style={{ display: 'flex', justifyContent: 'center', width: '65%', minWidth: '80px' }}><button data-target="modal1" className="modal-trigger btn-small waves-effect waves-light  blue lighten-1">Update Pic</button></div>
+                            <div style={{ display: 'flex', justifyContent: 'center', width: '80%', minWidth: '80px' }}><button data-target="modal1" className="modal-trigger btn-small waves-effect waves-light  blue lighten-1">Update Pic</button></div>
 
                             <div id="modal1" className="modal">
                             <h4 style={{ fontFamily: 'Grand Hotel, cursive', margin: '5px 5px' }}>Update Profile Pic</h4>

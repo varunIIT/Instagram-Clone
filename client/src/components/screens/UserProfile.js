@@ -44,8 +44,8 @@ const UserProfile = () => {
             {user && loading ?
                 <div className="profile-container" style={{ margin: "30px auto", width: '60%' }}>
                     <div id="profile-box">
-                        <div>
-                            <img className="profile-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU" alt="" />
+                        <div style={{width:'200px'}}>
+                            <img className="profile-image" src={user.profilePic} alt="" />
                         </div>
                         <div>
                             
