@@ -96,7 +96,7 @@ const Navbar = () => {
                             }}><Link to={state._id == item._id ? '/profile' : `/others-profile/${item._id}`}>
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <img src={item.profilePic} alt="" style={{ height: '25px', borderRadius: '50%', marginRight: '1px' }} />
-                                        {item.name}
+                                        {item.email}
                                     </div>
                                 </Link></li>
                         })}
