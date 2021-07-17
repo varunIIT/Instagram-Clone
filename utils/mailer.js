@@ -8,14 +8,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-const sendEmail=(targetEmail,token)=>{
-    var mailOptions = {
-        from: process.env.EMAIL,
-        to: targetEmail,
-        subject: 'Instagram Reset Password ',
-        html: `<h3>Please click <a href="${process.env.REDIRECT}${token}">here</a> to reset your passowrd.</h3>`
-      };
-      
+const sendEmail=(mailOptions)=>{
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);

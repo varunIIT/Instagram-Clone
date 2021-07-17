@@ -16,6 +16,13 @@ module.exports.signUp=async (req,res)=>{
             }
             else{//ready to create new user in db i.e successful sign up
                 const user= await User.create({name,email,password})
+                var mailOptions = {
+                    from: process.env.EMAIL,
+                    to: user.email,
+                    subject: 'Instagram-Sucessful Sign Up!',
+                    html: `<h3>Welcome ${user.name} to Instagram.</h3>`
+                  };
+                sendEmail(mailOptions)
                 return res.status(201).json({success:'Signed up successfully!'})
             }
         }
@@ -135,7 +142,13 @@ module.exports.resetPassword=async(req,res)=>{
         user.resetPasswordExpiry=Date.now()+300000
         await user.save()
         //Now send mail to this user
-        sendEmail(req.body.email,token)
+        var mailOptions = {
+            from: process.env.EMAIL,
+            to: req.body.email,
+            subject: 'Instagram-Reset Password ',
+            html: `<h3>Please click <a href="${process.env.REDIRECT}${token}">here</a> to reset your passowrd.</h3>`
+          };
+        sendEmail(mailOptions)
         res.status(200).json({success:'Please check your mail!'})
     }
     catch(err){
