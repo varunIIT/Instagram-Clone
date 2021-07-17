@@ -5,7 +5,7 @@ import M from 'materialize-css'
 
 const Navbar = () => {
     const history = useHistory()
-    const searchModal=useRef(null)
+    const searchModal = useRef(null)
     const { state, dispatch } = useContext(UserContext)
     const [search, setSearch] = useState('')
     const [user, setUser] = useState([])
@@ -17,7 +17,7 @@ const Navbar = () => {
         fetch('/user/search', {
             method: 'post',
             headers: {
-                'Content-Type':'application/json',
+                'Content-Type': 'application/json',
                 authorization: 'Bearer ' + localStorage.getItem('token')
             },
             body: JSON.stringify({
@@ -28,11 +28,12 @@ const Navbar = () => {
             .then(data => {
                 setUser(data.user)
             })
-    } 
+    }
     const renderLinks = () => {
         const signOut = () => {
             localStorage.clear()
             dispatch({ type: 'CLEAR' })
+            setUser([])
             history.push('/sign-in')
             //disabling back button code
             window.history.pushState(null, "", window.location.href);
@@ -78,28 +79,33 @@ const Navbar = () => {
                     </ul>
                 </div>
             </nav>
-            <div id="modal2" className="modal"ref={searchModal}>
-                    <div className="modal-content">
-                       <div>
-                            <input
-                                type="text"
-                                placeholder="Search Users"
-                                onChange={(e) => fetchUsers(e.target.value)}
-                            />
-                       </div>
-                        <ul className="collection" >
-                            {user.map(item=>{
-                                return  <li className="collection-item" onClick={()=>{
-                                    const instance=M.Modal.getInstance(searchModal.current)
-                                    instance.close()
-                                }}><Link to={state._id == item._id ? '/profile' : `/others-profile/${item._id}`}>{item.email}</Link></li>
-                            })}
-                        </ul>
+            <div id="modal2" className="modal" ref={searchModal}>
+                <div className="modal-content">
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Search Users"
+                            onChange={(e) => fetchUsers(e.target.value)}
+                        />
                     </div>
-                    <div className="modal-footer">
-                        <button className="modal-close btn waves-effect waves-light  blue lighten-1">close</button>
-                    </div>
+                    <ul className="collection" >
+                        {user.map(item => {
+                            return <li className="collection-item" onClick={() => {
+                                const instance = M.Modal.getInstance(searchModal.current)
+                                instance.close()
+                            }}><Link to={state._id == item._id ? '/profile' : `/others-profile/${item._id}`}>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <img src={item.profilePic} alt="" style={{ height: '25px', borderRadius: '50%', marginRight: '1px' }} />
+                                        {item.name}
+                                    </div>
+                                </Link></li>
+                        })}
+                    </ul>
                 </div>
+                <div className="modal-footer">
+                    <button className="modal-close btn waves-effect waves-light  blue lighten-1">close</button>
+                </div>
+            </div>
 
             <ul className="sidenav" id="mobile-demo">
                 {renderLinks()}
