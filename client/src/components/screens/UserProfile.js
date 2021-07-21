@@ -42,7 +42,7 @@ const UserProfile = () => {
     return (
         <>
             {user && loading ?
-                <div className="profile-container" style={{ margin: "30px auto", width: '60%' }}>
+                <div className="profile-container" style={{ margin: "30px auto", width: '65%' }}>
                     <div id="profile-box">
                         <div style={{width:'200px'}}>
                             <img className="profile-image" src={user.profilePic} alt="" />

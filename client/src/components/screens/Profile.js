@@ -40,6 +40,7 @@ const Profile = () => {
         .then(res=>res.json())
         .then(data=>{
             setUser(data.user)
+            dispatch({type:'USER',payload:{_id:data.user._id,name:data.user.name,email:data.user.email,profilePic:data.user.profilePic}})
         })
     }
     const UploadPicTOCloud=()=>{
