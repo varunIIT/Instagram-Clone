@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-mongoose.connect(process.env.MONGO_URI||'mongodb://localhost/Instagram-Clone-test', {
+mongoose.connect(process.env.MONGO_URI||'mongodb://localhost/Instagram-Clone', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
