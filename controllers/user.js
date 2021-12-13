@@ -20,7 +20,7 @@ module.exports.signUp=async (req,res)=>{
                     from: process.env.EMAIL,
                     to: user.email,
                     subject: 'Instagram-Sucessful Sign Up!',
-                    html: `<h3>Welcome ${user.name} to Instagram.</h3>`
+                    html: `<h3>Welcome ${user.name} to Instagram!</h3>`
                   };
                 sendEmail(mailOptions)
                 return res.status(201).json({success:'Signed up successfully!'})
@@ -183,6 +183,40 @@ module.exports.search=async(req,res)=>{
         console.log(pattern)
         const user=await User.find({email:{$regex:pattern}})
         res.status(200).json({user})
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+const { OAuth2Client } = require('google-auth-library')
+const client = new OAuth2Client(process.env.CLIENT_ID)
+
+module.exports.googleAuth=async (req,res)=>{
+    try{
+        const googleToken=req.body.token
+        const ticket = await client.verifyIdToken({
+            idToken: googleToken,
+            audience: process.env.CLIENT_ID
+        });
+        const {email,name } = ticket.getPayload();
+        const password=email+googleToken
+        let user=await User.findOne({email})
+        
+        if(!user){//sign up
+            user=await User.create({email,password,name})
+            var mailOptions = {
+                from: process.env.EMAIL,
+                to: user.email,
+                subject: 'Instagram-Sucessful Sign Up!',
+                html: `<h3>Welcome ${user.name} to Instagram!</h3>`
+              };
+            sendEmail(mailOptions)    
+        }
+        const token=jwt.sign({_id:user._id},process.env.JWT_SECRET)
+        const {_id,profilePic}=user
+        return res.status(200).json({token,_id,name,email,profilePic})
+
     }
     catch(err){
         console.log(err)

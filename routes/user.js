@@ -12,4 +12,5 @@ route.patch('/update-profile-pic',checkAuth,userController.updateProfilePic)
 route.post('/reset-password',userController.resetPassword)
 route.post('/new-password',userController.newPassword)
 route.post('/search',checkAuth,userController.search)
+route.post('/google-auth',userController.googleAuth)
 module.exports=route
