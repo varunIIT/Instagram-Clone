@@ -3,7 +3,7 @@ import M from 'materialize-css'
 import { useHistory } from "react-router"
 import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'
-import GoogleLogin from 'react-google-login'
+import GoogleLogin from "react-google-login"
 
 const SignIn = () => {
     const { state, dispatch } = useContext(UserContext)
