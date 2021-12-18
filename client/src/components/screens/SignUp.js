@@ -92,7 +92,7 @@ const SignUp = () => {
                     <label htmlFor="password">Password</label>
                 </div>
                 <button className="btn waves-effect waves-light  blue lighten-1" onClick={postData}>Sign Up</button>
-                <div className="input-field">
+                {/* <div className="input-field">
                     <GoogleLogin
                         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                         buttonText="Log in with Google"
@@ -100,7 +100,7 @@ const SignUp = () => {
                         onFailure={responseErrorGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                </div>
+                </div> */}
 
             </div>
         </div>

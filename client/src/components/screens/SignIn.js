@@ -94,7 +94,7 @@ const SignIn = () => {
                     <label htmlFor="password">Password</label>
                 </div>
                 <button className="btn waves-effect waves-light  blue lighten-1" onClick={postData}>Sign In</button>
-                <div className="input-field">
+                {/* <div className="input-field">
                     <GoogleLogin
                         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                         buttonText="Log in with Google"
@@ -102,7 +102,7 @@ const SignIn = () => {
                         onFailure={responseErrorGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                </div>
+                </div> */}
 
                 <h6 style={{ marginTop: '20px' }}>
                     Forgot Password? Click <Link className="reset-pass-link" to="/reset-password">here</Link>
