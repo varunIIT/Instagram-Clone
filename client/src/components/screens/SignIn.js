@@ -78,8 +78,8 @@ const SignIn = () => {
         }
 
     }
-    const responseErrorGoogle = () => {
-
+    const responseErrorGoogle = (err) => {
+        console.log(err)
     }
     return (
         <div className="signIn-container">
