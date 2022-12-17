@@ -4,7 +4,8 @@ mongoose.connect(process.env.MONGO_URI||'mongodb://localhost/Instagram-Clone', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-  useCreateIndex: true
+  useCreateIndex: true,
+  family:4
 }).then(()=>{
     console.log('db connection successful')
 }).catch((err)=>{

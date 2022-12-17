@@ -215,7 +215,7 @@ module.exports.googleAuth=async (req,res)=>{
         }
         const token=jwt.sign({_id:user._id},process.env.JWT_SECRET)
         const {_id,profilePic}=user
-        return res.status(200).json({token,_id,name,email,profilePic})
+        return res.status(200).json({token,_id,name:user.name,email,profilePic})
 
     }
     catch(err){

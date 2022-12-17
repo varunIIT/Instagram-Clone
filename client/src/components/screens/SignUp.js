@@ -72,8 +72,8 @@ const SignUp = () => {
         }
 
     }
-    const responseErrorGoogle = () => {
-
+    const responseErrorGoogle = (err) => {
+        console.log(err)
     }
     return (
         <div className="signUp-container">
